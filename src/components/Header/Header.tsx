@@ -4,11 +4,13 @@ import Image from "next/image";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import { HiArrowLeftOnRectangle } from "react-icons/hi2";
+import { useRouter } from "next/navigation";
 
 const USER_IMAGE = "/icons/user-profile.svg";
 
 export const Header: React.FC = () => {
   const { data: session } = useSession();
+  const router = useRouter();
 
   return (
     <section className="flex justify-between p-3 border-b-[2px] border-[#FF3366]">
@@ -17,9 +19,14 @@ export const Header: React.FC = () => {
         alt="Logo"
         width={150}
         height={150}
+        onClick={() => router.push("/")}
+        className="cursor-pointer"
       />
       <div className="flex gap-4">
-        <button className="p-2 px-3 rounded-full bg-black text-white">
+        <button
+          className="p-2 px-3 rounded-full bg-black text-white"
+          onClick={() => router.push("/create-post")}
+        >
           <span className="hidden sm:block">Create Post</span>
           <HiOutlinePencilSquare className="sm:hidden text-[20px]" />
         </button>
@@ -47,6 +54,7 @@ export const Header: React.FC = () => {
           width={40}
           height={40}
           className="cursor-pointer"
+          onClick={() => router.push("/profile")}
         />
       </div>
     </section>

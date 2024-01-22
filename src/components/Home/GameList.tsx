@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { GameListData } from "./../../shared";
 
-export interface GameListProps {}
+export interface GameListProps {
+  onGamePress: (gameName: string) => void;
+}
 
-export const GameList: React.FC<GameListProps> = ({}) => {
-  // const [games, setGames] = useState();
-
-  // useEffect(() => {
-  //   setGames(GameListData);
-  // }, []);
-
+export const GameList: React.FC<GameListProps> = ({ onGamePress }) => {
   return (
     <div
       className="grid grid-cols-3 sm:grid-cols-4
@@ -18,7 +14,7 @@ export const GameList: React.FC<GameListProps> = ({}) => {
       {GameListData?.map((item) => (
         <div
           key={item.id}
-          // onClick={() => onGamePress(item.name)}
+          onClick={() => onGamePress(item.name)}
           className="flex flex-col 
             items-center cursor-pointer
             "

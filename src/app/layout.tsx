@@ -18,9 +18,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
-        {children}
-        <Footer />
+        <div
+          className="darkMode: bg-slate-100
+          darkMode: text-slate-900"
+        >
+          <Header />
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
   );

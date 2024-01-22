@@ -9,7 +9,7 @@ const USER_IMAGE = "/icons/user-profile.svg";
 
 export const Header: React.FC = () => {
   const { data: session } = useSession();
-  console.log(session);
+
   return (
     <section className="flex justify-between p-3 border-b-[2px] border-[#FF3366]">
       <Image

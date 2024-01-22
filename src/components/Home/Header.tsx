@@ -1,9 +1,15 @@
-import Image from "next/image";
+"use client";
 import React from "react";
+import Image from "next/image";
+import { useSession, signIn, signOut } from "next-auth/react";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 import { HiArrowLeftOnRectangle } from "react-icons/hi2";
 
+const USER_IMAGE = "/icons/user-profile.svg";
+
 export const Header: React.FC = () => {
+  const { data: session } = useSession();
+  console.log(session);
   return (
     <section className="flex justify-between p-3 border-b-[2px] border-[#FF3366]">
       <Image
@@ -17,13 +23,26 @@ export const Header: React.FC = () => {
           <span className="hidden sm:block">Create Post</span>
           <HiOutlinePencilSquare className="sm:hidden text-[20px]" />
         </button>
-        <button className="p-2 px-3 bg-white text-gray-500 border-[1px] rounded-full">
-          <span className="hidden sm:block"> Sign In</span>
-          <HiArrowLeftOnRectangle className="sm:hidden text-[20px]" />
-        </button>
+        {session ? (
+          <button
+            className="p-2 px-3 rounded-full bg-black text-white"
+            onClick={() => signOut()}
+          >
+            <span className="hidden sm:block">Sign Out</span>
+            <HiArrowLeftOnRectangle className="sm:hidden text-[20px]" />
+          </button>
+        ) : (
+          <button
+            className="p-2 px-3 rounded-full bg-black text-white"
+            onClick={() => signIn()}
+          >
+            <span className="hidden sm:block">Sign In</span>
+            <HiArrowLeftOnRectangle className="sm:hidden text-[20px]" />
+          </button>
+        )}
 
         <Image
-          src="/icons/user-profile.svg"
+          src={session?.user?.image ?? USER_IMAGE}
           alt="User Profile"
           width={40}
           height={40}

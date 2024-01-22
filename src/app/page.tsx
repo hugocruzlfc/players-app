@@ -1,23 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
 import { GameList, Hero, Posts, Search } from "@/components";
-import { firebaseApp } from "@/libs";
 import { Post } from "@/types";
-import styles from "@/styles/Home.module.css";
-
-import {
-  getFirestore,
-  doc,
-  setDoc,
-  getDoc,
-  collection,
-  getDocs,
-  query,
-  where,
-} from "firebase/firestore";
+import { db, getDocs, collection } from "@/shared";
 
 export default function Home() {
-  const db = getFirestore(firebaseApp);
   const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {

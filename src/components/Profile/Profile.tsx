@@ -2,15 +2,14 @@
 import React, { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import {
+  db,
+  query,
   collection,
+  where,
+  getDocs,
   deleteDoc,
   doc,
-  getDocs,
-  getFirestore,
-  query,
-  where,
-} from "firebase/firestore";
-import { firebaseApp } from "@/libs";
+} from "@/shared";
 import { Toast } from "../Toast";
 import { PostItem } from "../Posts";
 import { Post } from "@/types";
@@ -18,7 +17,6 @@ import { Post } from "@/types";
 export const Profile: React.FC = () => {
   const { data: session } = useSession();
   const [userPost, setUserPost] = useState<Post[]>([]);
-  const db = getFirestore(firebaseApp);
 
   const [showToast, setShowToast] = useState(false);
 
